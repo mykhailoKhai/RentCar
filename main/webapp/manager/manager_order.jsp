@@ -63,26 +63,36 @@
         </div>
         <br>
         <div>
-            <form method="post" action="/RentCar/manager?formType=changeStatusOrder&orderId=${order.orderId}">
-                <fmt:message key="managerOrder.changeStatus"/> :
-                <select name="allStatusOrder">
-                    <option value="${order.statusOrder}" select disable hidden>
-                        <fmt:message key="enum.status.${order.statusOrder}"/>
-                    </option>
-                    <c:forEach items="${allStatusOrder}" var="sOrder">
-                        <option value="${allStatusOrder.get(sOrder.statusId - 1)}">
-                                <fmt:message key="enum.status.${allStatusOrder.get(sOrder.statusId - 1)}"/>
+            <c:if test="${order.statusOrder == 'NEW_ORDER' or order.statusOrder == 'ISSUE_ORDER'}">
+                <form method="post" action="/RentCar/manager?formType=changeStatusOrder&orderId=${order.orderId}">
+                    <fmt:message key="managerOrder.changeStatus"/> :
+                    <select name="allStatusOrder">
+                        <option value="${order.statusOrder}" select disable hidden>
+                            <fmt:message key="enum.status.${order.statusOrder}"/>
                         </option>
-                    </c:forEach>
-                </select>
-                <fmt:message key="managerOrder.statusMessage"/> :
-                <input value="${order.statusMessage}" type="text" name="statusMessage">
-                <button type="submit"><fmt:message key="managerOrder.changeStatusAndSendMessage"/></button>
-            </form>
-            <form method="post" action="/RentCar/manager?formType=changeDamagePaid&orderId=${order.orderId}">
-                <fmt:message key="managerOrder.paymentForDamage"/> :<input type="number" step=".01" name="damagePaid">
-                <button type="submit"><fmt:message key="managerOrder.theCostOfDamage"/></button>
-            </form>
+                        <option value="${allStatusOrder.get(1)}">
+                                <fmt:message key="enum.status.${allStatusOrder.get(1)}"/>
+                        </option>
+                        <c:if test="${order.statusOrder != 'ISSUE_ORDER'}">
+                            <option value="${allStatusOrder.get(2)}">
+                                <fmt:message key="enum.status.${allStatusOrder.get(2)}"/>
+                            </option>
+                        </c:if>
+                        <c:if test="${order.statusOrder != 'NEW_ORDER'}">
+                            <option value="${allStatusOrder.get(3)}">
+                                <fmt:message key="enum.status.${allStatusOrder.get(3)}"/>
+                            </option>
+                        </c:if>
+                    </select>
+                    <fmt:message key="managerOrder.statusMessage"/> :
+                    <input value="${order.statusMessage}" type="text" name="statusMessage">
+                    <button type="submit"><fmt:message key="managerOrder.changeStatusAndSendMessage"/></button>
+                </form>
+                <form method="post" action="/RentCar/manager?formType=changeDamagePaid&orderId=${order.orderId}">
+                    <fmt:message key="managerOrder.paymentForDamage"/> :<input type="number" step=".01" name="damagePaid">
+                    <button type="submit"><fmt:message key="managerOrder.theCostOfDamage"/></button>
+                </form>
+            </c:if>
         </div>
     </div>
 

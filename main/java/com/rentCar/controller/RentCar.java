@@ -3,6 +3,9 @@ package com.rentCar.controller;
 import com.rentCar.DAO.CarDAO;
 import com.rentCar.DAO.OrderDAO;
 import com.rentCar.DAO.UserDao;
+import com.rentCar.DAO.impl.CarDAOImpl;
+import com.rentCar.DAO.impl.OrderDAOImpl;
+import com.rentCar.DAO.impl.UserDaoImpl;
 import com.rentCar.entity.car.Car;
 import com.rentCar.entity.order.Order;
 import com.rentCar.entity.order.Status;
@@ -35,7 +38,7 @@ public class RentCar extends HttpServlet {
 
         HttpSession session = req.getSession();
 
-        CarDAO carDAO = new CarDAO();
+        CarDAO carDAO = new CarDAOImpl();
 
         String carId = req.getParameter("carId");
         if (carId != "" && carId != null) {
@@ -75,11 +78,11 @@ public class RentCar extends HttpServlet {
         HttpSession session = req.getSession();
         String message = null;
 
-        CarDAO carDAO = new CarDAO();
+        CarDAO carDAO = new CarDAOImpl();
         Car car = carDAO.getCarById((long) session.getAttribute("carId"));
-        UserDao userDao = new UserDao();
+        UserDao userDao = new UserDaoImpl();
         User user = userDao.getFindById(( (User) session.getAttribute("customer") ).getUserId());
-        OrderDAO orderDAO = new OrderDAO();
+        OrderDAO orderDAO = new OrderDAOImpl();
 
         Date startRent = null;
         Date endRent = null;
@@ -163,6 +166,7 @@ public class RentCar extends HttpServlet {
         } else {
             if (req.getParameter("formType") != null && req.getParameter("formType").equals("changeInf")) {
                 resp.sendRedirect("/RentCar/rent");
+                logger.info("User updated information about rent car user.id : " + user.getUserId() + " , car.id: " + car.getCarId());
                 return;
             } else {
                 userDao.changeAccount(changeAccount, user.getUserId());
@@ -181,6 +185,7 @@ public class RentCar extends HttpServlet {
                 order.setUser(user);
 
                 orderDAO.createNewOrder(order);
+                logger.info("User created order user.id: " + user.getUserId() + " , order.id: " + order.getOrderId() + " , car.id: " + car.getCarId());
             }
         }
 

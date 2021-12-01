@@ -26,7 +26,7 @@
                 <div>
                     <label><fmt:message key="user.login"/></label>
                     <label>
-                        <input value=<c:out value="${customer.login}"/> type="text" name="login"/>
+                        <input value="<c:out value="${customer.login}"/>" type="text" name="login"/>
                     </label>
                 </div>
                 <div>
@@ -50,37 +50,37 @@
                 <div>
                     <label><fmt:message key="user.lastName"/></label>
                     <label>
-                        <input value=<c:out value="${customer.lastName}"/> type="text" name="lastName"/>
+                        <input value="<c:out value="${customer.lastName}"/>" type="text" name="lastName"/>
                     </label>
                 </div>
                 <div>
                     <label><fmt:message key="user.firstName"/></label>
                     <label>
-                        <input value=<c:out value="${customer.firstName}"/> type="text" name="firstName"/>
+                        <input value="<c:out value="${customer.firstName}"/>" type="text" name="firstName"/>
                     </label>
                 </div>
                 <div>
                     <label><fmt:message key="user.phoneNumber"/></label>
                     <label>
-                        <input value=<c:out value="${customer.phoneNum}"/> type="number" name="phoneNum"/>
+                        <input value="<c:out value="${customer.phoneNum}"/>" type="number" name="phoneNum"/>
                     </label>
                 </div>
                 <div>
                     <label><fmt:message key="user.email"/></label>
                     <label>
-                        <input value=<c:out value="${customer.email}"/> type="email" name="email"/>
+                        <input value="<c:out value="${customer.email}"/>" type="email" name="email"/>
                     </label>
                 </div>
                 <div>
                     <label><fmt:message key="user.documentSeries"/></label>
                     <label>
-                        <input value=<c:out value="${customer.documentSeries}"/> type="text" name="documentSeries"/>
+                        <input value="<c:out value="${customer.documentSeries}"/>" type="text" name="documentSeries"/>
                     </label>
                 </div>
                 <div>
                     <label><fmt:message key="user.documentNumber"/></label>
                     <label>
-                        <input value=<c:out value="${customer.documentNum}"/> type="number" name="documentNum"/>
+                        <input value="<c:out value="${customer.documentNum}"/>" type="number" name="documentNum"/>
                     </label>
                 </div>
                 <div>
@@ -92,7 +92,7 @@
                 <div>
                     <label><fmt:message key="user.documentAuthority"/></label>
                     <label>
-                        <input value=<c:out value="${customer.authority}"/> type="text" name="authority"/>
+                        <input value="<c:out value="${customer.authority}"/>" type="text" name="authority"/>
                     </label>
                 </div>
                 <div>

@@ -1,6 +1,9 @@
 package com.rentCar.controller;
 
 import com.rentCar.DAO.OrderDAO;
+import com.rentCar.DAO.UserDao;
+import com.rentCar.DAO.impl.OrderDAOImpl;
+import com.rentCar.DAO.impl.UserDaoImpl;
 import com.rentCar.entity.order.Order;
 import com.rentCar.entity.order.Status;
 import org.apache.log4j.Logger;
@@ -25,7 +28,7 @@ public class Manager extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
-        OrderDAO orderDAO = new OrderDAO();
+        OrderDAO orderDAO = new OrderDAOImpl();
         String message = null;
 
         long orderId = 0;
@@ -76,7 +79,9 @@ public class Manager extends HttpServlet {
         if (req.getParameter("orderId") != null) {
             long orderId = Long.parseLong(req.getParameter("orderId"));
 
-            OrderDAO orderDAO = new OrderDAO();
+            OrderDAO orderDAO = new OrderDAOImpl();
+            UserDao userDao = new UserDaoImpl();
+
             Order order = orderDAO.getFindById(orderId);
 
             if (order.getOrderId() == 0 && order.getOrderId() != orderId) {
@@ -85,20 +90,37 @@ public class Manager extends HttpServlet {
                 String statusOrder = Status.valueOf(req.getParameter("allStatusOrder")).toString();
                 if (statusOrder.equals("CLOSE_ORDER")) {
                     if (order.getDamagePaid() <= 0.01 || order.getIsPaidDamage()) {
-                        orderDAO.changeStatusOrder(orderId, statusOrder);
+                        orderDAO.changeStatusOrder(order.getOrderId(), statusOrder);
+                        logger.info("Order closed order.id: " + order.getOrderId());
+
                     } else {
                         message = "error.userDidNotPayForDamage";
                     }
+                } else if (statusOrder.equals("REJECT_ORDER")) {
+                    double totalCost = order.getTotalCost();
+                    double account = order.getUser().getAccount();
+                    long userId = order.getUser().getUserId();
+                    userDao.changeAccount(totalCost + account, userId);
+                    logger.info("Change account user.id: " + userId);
+                    orderDAO.changeStatusOrder(order.getOrderId(), statusOrder);
+                    logger.info("Change status order.id: " + order.getOrderId() + " , status: " + statusOrder);
+                    orderDAO.changeTotalCost(order.getOrderId(), 0);
+                    logger.info("Change total cost order.id: " + order.getOrderId() + " , sum: " + totalCost);
+                    logger.info("Order reject order.id: " + order.getOrderId());
+
                 } else {
                     orderDAO.changeStatusOrder(orderId, statusOrder);
+                    logger.info("Change status order.id: " + order.getOrderId() + " , status: " + statusOrder);
                 }
                 String statusMessage = req.getParameter("statusMessage");
-                if (statusMessage != null) {
+                if (statusMessage != null && statusMessage != "") {
                     orderDAO.changeStatusMessage(orderId, statusMessage);
+                    logger.info("Change status message order.id: " + order.getOrderId());
                 }
             } else if (formType.equals("changeDamagePaid")) {
                 double damagePaid = Double.parseDouble(req.getParameter("damagePaid"));
                 orderDAO.changeDamagePaid(orderId, damagePaid);
+                logger.info("Change pay for damage order.id: " + order.getOrderId() + " , sum: " + damagePaid);
             }
         } else if (formType.equals("filterOrder")) {
             session.setAttribute("filter", req.getParameter("typeOrder"));

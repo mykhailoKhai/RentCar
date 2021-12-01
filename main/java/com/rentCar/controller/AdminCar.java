@@ -1,6 +1,7 @@
 package com.rentCar.controller;
 
 import com.rentCar.DAO.CarDAO;
+import com.rentCar.DAO.impl.CarDAOImpl;
 import com.rentCar.entity.car.*;
 import org.apache.log4j.Logger;
 
@@ -25,7 +26,7 @@ public class AdminCar extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
-        CarDAO carDAO = new CarDAO();
+        CarDAO carDAO = new CarDAOImpl();
         req.setAttribute("bodyTypes", new ArrayList<>(Arrays.asList(BodyType.values())));
         req.setAttribute("carTypes", new ArrayList<>(Arrays.asList(CarType.values())));
         req.setAttribute("transmissionTypes", new ArrayList<>(Arrays.asList(TransmissionType.values())));
@@ -58,7 +59,7 @@ public class AdminCar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        CarDAO carDAO = new CarDAO();
+        CarDAO carDAO = new CarDAOImpl();
         String formType = req.getParameter("formType");
         String message = null;
 
@@ -67,6 +68,7 @@ public class AdminCar extends HttpServlet {
             Car carById = carDAO.getCarById(idDeleteCar);
             if (carById.getCarId() == idDeleteCar && carById.getCarId() != 0) {
                 carDAO.deleteCar(idDeleteCar);
+                logger.info("Car deleted car.id: " + idDeleteCar);
             } else {
                 message = "error.carDoesNotExist";
             }
@@ -94,11 +96,12 @@ public class AdminCar extends HttpServlet {
             car.setIsActive(Boolean.parseBoolean(req.getParameter("isActive").trim()));
 
             if (formType.equals("createCar")) {
-                boolean car1 = carDAO.createCar(car);
-                logger.info("Is car create: " + car1);
+                carDAO.createCar(car);
+                logger.info("Car created car.id: " + car.getCarId());
             } else if (formType.equals("update")) {
                 long idUpdateCar = Long.parseLong(String.valueOf(session.getAttribute("carId")));
                 carDAO.updateCar(idUpdateCar, car);
+                logger.info("Car updated car.id: " + car.getCarId());
                 session.removeAttribute("carId");
             }
         } else if (formType.equals("mainCar")){

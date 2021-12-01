@@ -37,11 +37,11 @@
             </div>
             <div>
                 <fmt:message key="car.brand"/> :
-                <input value=<c:out value="${car.brand}"/> type="text" name="brand"/>
+                <input value="<c:out value="${car.brand}"/>" type="text" name="brand"/>
             </div>
             <div>
                 <fmt:message key="car.model"/> :
-                <input value=<c:out value="${car.model}"/> type="text" name="model"/>
+                <input value="<c:out value="${car.model}"/>" type="text" name="model"/>
             </div>
             <div>
                 <fmt:message key="car.bodyType"/> :
@@ -71,7 +71,7 @@
             </div>
             <div>
                 <fmt:message key="car.yearCreation"/> :
-                <input value=<c:out value="${car.yearCreation}"/> type="number" name="yearCreation"/>
+                <input value="<c:out value="${car.yearCreation}"/>" type="number" name="yearCreation"/>
             </div>
             <div>
                 <fmt:message key="car.transmission"/> :
@@ -88,11 +88,11 @@
             </div>
             <div>
                 <fmt:message key="car.sizeEngine"/> :
-                <input value=<c:out value="${car.engineSize}"/> step=".01" type="number" name="engineSize"/>
+                <input value="<c:out value="${car.engineSize}"/>" step=".01" type="number" name="engineSize"/>
             </div>
             <div>
                 <fmt:message key="car.powerEngine"/> :
-                <input value=<c:out value="${car.enginePower}"/> type="number" name="enginePower"/>
+                <input value="<c:out value="${car.enginePower}"/>" type="number" name="enginePower"/>
             </div>
             <div>
                 <fmt:message key="car.fuelType"/> :
@@ -109,7 +109,7 @@
             </div>
             <div>
                 <fmt:message key="car.price"/> :
-                <input value=<c:out value="${car.price}"/> step=".01" type="number" name="price"/>
+                <input value="<c:out value="${car.price}"/>" step=".01" type="number" name="price"/>
             </div>
             <div>
                 <fmt:message key="car.isActive"/> :

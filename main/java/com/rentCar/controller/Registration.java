@@ -1,6 +1,7 @@
 package com.rentCar.controller;
 
 import com.rentCar.DAO.UserDao;
+import com.rentCar.DAO.impl.UserDaoImpl;
 import com.rentCar.entity.user.Role;
 import com.rentCar.entity.user.User;
 import com.rentCar.utill.MD5Util;
@@ -33,9 +34,8 @@ public class Registration extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         String conPassword = req.getParameter("conPassword");
-        UserDao userDao = new UserDao();
+        UserDao userDao = new UserDaoImpl();
         String message = null;
-        boolean userIsCreate = false;
 
         if (login.isEmpty() || password.isEmpty() || login == null || password == null) {
             message = "error.loginOrPasswordIsEmpty";
@@ -58,14 +58,10 @@ public class Registration extends HttpServlet {
             user.setRole(Role.CUSTOMER.toString());
             user.setIsActive(true);
             user.setAccount(0);
-
-            if (userDao.createUser(user)){
-                logger.info("User is create");
-                userIsCreate = true;
-            }
+            logger.info("User was register");
         }
 
-        if (userIsCreate) {
+        if (message == null) {
             resp.sendRedirect("/RentCar/login");
         } else {
             session.setAttribute("message", message);
