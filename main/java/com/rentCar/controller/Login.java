@@ -1,6 +1,7 @@
 package com.rentCar.controller;
 
 import com.rentCar.DAO.UserDao;
+import com.rentCar.DAO.impl.UserDaoImpl;
 import com.rentCar.entity.user.User;
 import com.rentCar.utill.MD5Util;
 import org.apache.log4j.Logger;
@@ -34,7 +35,7 @@ public class Login extends HttpServlet {
         String password = req.getParameter("password");
         HttpSession session = req.getSession();
         String message = null;
-        UserDao userDao = new UserDao();
+        UserDao userDao = new UserDaoImpl();
 
         if(!userDao.existUserByLogin(login)) {
             message = "error.loginIsInvalid";
@@ -46,6 +47,7 @@ public class Login extends HttpServlet {
             message = "error.userWithThisLoginAndPasswordIsBlock";
         } else  {
             User user = userDao.getFindByLoginAndPassword(login, MD5Util.codingToMD5(password));
+            logger.info("User has logged user.id: " + user.getUserId());
             if (user.getRole().equals("CUSTOMER")) {
                 session.setAttribute("customer", user);
                 resp.sendRedirect("/RentCar/main");

@@ -1,6 +1,7 @@
 package com.rentCar.controller;
 
 import com.rentCar.DAO.UserDao;
+import com.rentCar.DAO.impl.UserDaoImpl;
 import com.rentCar.entity.user.Role;
 import com.rentCar.entity.user.User;
 import com.rentCar.utill.MD5Util;
@@ -29,7 +30,7 @@ public class AdminUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        UserDao userDao = new UserDao();
+        UserDao userDao = new UserDaoImpl();
         req.setAttribute("roles", new ArrayList<>(Arrays.asList(Role.values())));
         List<User> users = userDao.getAllUsers();
 
@@ -40,7 +41,7 @@ public class AdminUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String formType = req.getParameter("formType");
-        UserDao userDao = new UserDao();
+        UserDao userDao = new UserDaoImpl();
 
         if (formType.equals("createUser")) {
             User user = new User();
@@ -67,10 +68,12 @@ public class AdminUser extends HttpServlet {
             }
             user.setAuthority(req.getParameter("authority"));
             userDao.createUser(user);
+            logger.info("Manager created user.id: " + user.getUserId());
         } else if (formType.equals("createActive")) {
             long userId = Long.parseLong(req.getParameter("userId"));
             boolean isActive = Boolean.parseBoolean(req.getParameter("isActive"));
             userDao.changeActiveUser(userId, isActive);
+            logger.info("User user.id: " + userId + " , make active: " + isActive);
         }
 
         resp.sendRedirect("/RentCar/admin/user");

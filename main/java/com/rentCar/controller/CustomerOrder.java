@@ -3,6 +3,8 @@ package com.rentCar.controller;
 import com.rentCar.DAO.CarDAO;
 import com.rentCar.DAO.OrderDAO;
 import com.rentCar.DAO.UserDao;
+import com.rentCar.DAO.impl.OrderDAOImpl;
+import com.rentCar.DAO.impl.UserDaoImpl;
 import com.rentCar.entity.order.Order;
 import com.rentCar.entity.user.User;
 import org.apache.log4j.Logger;
@@ -29,7 +31,7 @@ public class CustomerOrder extends HttpServlet {
         HttpSession session = req.getSession();
 
         User user = (User) session.getAttribute("customer");
-        UserDao userDao = new UserDao();
+        UserDao userDao = new UserDaoImpl();
         List<Order> orders = userDao.getAllOrdersForUser(user.getUserId());
         List<Order> sortList = orders.stream().sorted((o1, o2) -> (int) (o2.getOrderId() - o1.getOrderId())).collect(Collectors.toList());
 
@@ -53,9 +55,9 @@ public class CustomerOrder extends HttpServlet {
 
         HttpSession session = req.getSession();
         User customer = (User) session.getAttribute("customer");
-        UserDao userDao = new UserDao();
+        UserDao userDao = new UserDaoImpl();
         User user = userDao.getFindById(customer.getUserId());
-        OrderDAO orderDAO = new OrderDAO();
+        OrderDAO orderDAO = new OrderDAOImpl();
 
         String formType = req.getParameter("formType");
         if (formType.equals("paidDamage")) {
@@ -65,6 +67,7 @@ public class CustomerOrder extends HttpServlet {
             if (user.getAccount() >= order.getDamagePaid()) {
                 userDao.changeAccount(user.getAccount() - order.getDamagePaid(), user.getUserId());
                 orderDAO.changeStatusDamagePaid(orderId, true);
+                logger.info("User paid for damage user.id: " + user.getUserId() + " , in order.id: " + orderId);
             } else {
                 String message = "error.youHaveSmallAccount";
                 session.setAttribute("message", message);

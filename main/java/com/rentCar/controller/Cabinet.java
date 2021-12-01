@@ -1,8 +1,10 @@
 package com.rentCar.controller;
 
 import com.rentCar.DAO.UserDao;
+import com.rentCar.DAO.impl.UserDaoImpl;
 import com.rentCar.entity.user.User;
 import com.rentCar.utill.MD5Util;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +18,9 @@ import java.text.SimpleDateFormat;
 
 @WebServlet("/cabinet")
 public class Cabinet extends HttpServlet {
+
+    private static final Logger logger = Logger.getLogger(Cabinet.class);
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,7 +37,7 @@ public class Cabinet extends HttpServlet {
         User customer = (User) session.getAttribute("customer");
         String message = null;
 
-        UserDao userDao = new UserDao();
+        UserDao userDao = new UserDaoImpl();
 
         String formType = req.getParameter("formType");
 
@@ -50,6 +55,7 @@ public class Cabinet extends HttpServlet {
                     updateUser.setPassword(userDao.getPasswordUserById(customer.getUserId()));
                 } else {
                     updateUser.setPassword(MD5Util.codingToMD5(req.getParameter("newPassword")));
+                    logger.info("User updated password user.id: " + updateUser.getUserId());
                 }
             } else {
                 updateUser.setPassword(userDao.getPasswordUserById(customer.getUserId()));
@@ -70,6 +76,7 @@ public class Cabinet extends HttpServlet {
             }
             updateUser.setAuthority(req.getParameter("authority"));
             userDao.updateUser(updateUser);
+            logger.info("User updated information user.id: " + updateUser.getUserId());
             session.setAttribute("customer", userDao.getFindById(customer.getUserId()));
             resp.sendRedirect("/RentCar/cabinet");
 
@@ -77,6 +84,7 @@ public class Cabinet extends HttpServlet {
             User user = userDao.getFindById(customer.getUserId());
             Double money = Double.parseDouble(req.getParameter("money"));
             userDao.changeAccount(money + user.getAccount(), customer.getUserId());
+            logger.info("User updated account user.id: " + user.getUserId());
             session.setAttribute("customer", userDao.getFindById(customer.getUserId()));
             resp.sendRedirect("/RentCar/cabinet");
         }

@@ -2,6 +2,8 @@ package com.rentCar.controller;
 
 import com.rentCar.DAO.CarDAO;
 import com.rentCar.DAO.OrderDAO;
+import com.rentCar.DAO.impl.CarDAOImpl;
+import com.rentCar.DAO.impl.OrderDAOImpl;
 import com.rentCar.entity.car.Car;
 import com.rentCar.entity.car.CarType;
 import com.rentCar.entity.order.Order;
@@ -32,7 +34,7 @@ public class MainPage extends HttpServlet {
         Date startRent = null;
         Date endRent = null;
         String message = null;
-        CarDAO carDAO = new CarDAO();
+        CarDAO carDAO = new CarDAOImpl();
         req.setAttribute("brands", carDAO.getAllUniqueBrandsCar());
         req.setAttribute("carTypes", new ArrayList<>(Arrays.asList(CarType.values())));
         List<Car> cars = carDAO.getAllCars();
@@ -62,7 +64,7 @@ public class MainPage extends HttpServlet {
                 message = "error.yourDatesAreInvalid";
                 session.setAttribute("message", message);
             } else {
-                List<Order> orders = new OrderDAO().getAllOrder();
+                List<Order> orders = new OrderDAOImpl().getAllOrder();
                 Iterator<Car> iterator = cars.iterator();
                 while (iterator.hasNext()) {
                     Car car = iterator.next();
