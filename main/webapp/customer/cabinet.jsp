@@ -20,6 +20,7 @@
         <jsp:include page="../header.jsp"/>
     </div>
     <div class="main container">
+
         <div class="text-center mt-3">
             <h3><fmt:message key="header.cabinet"/></h3>
         </div>
