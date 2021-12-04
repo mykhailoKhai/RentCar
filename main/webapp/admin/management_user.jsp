@@ -16,40 +16,37 @@
     <title><fmt:message key="adminUser.managementUserAdmin"/></title>
 </head>
 <body>
-
-<jsp:include page="../header.jsp"/>
-
-    <h3><fmt:message key="adminUser.managementUserAdmin"/></h3>
-
+    <div>
+        <jsp:include page="../header.jsp"/>
+    </div>
+    <div>
+        <h3><fmt:message key="adminUser.managementUserAdmin"/></h3>
+    </div>
     <div class="form">
-        <h5><fmt:message key="adminUser.createNewManager"/></h5>
+        <div>
+            <h5><fmt:message key="adminUser.createNewManager"/></h5>
+        </div>
         <form method="post" action="/RentCar/admin/user?formType=createUser">
             <div>
-                <fmt:message key="user.login"/> :
-                <input type="text" name="login"/>
+                <fmt:message key="user.login"/>:<input type="text" name="login"/>
             </div>
             <div>
-                <fmt:message key="user.password"/> :
-                <input type="password" name="password"/>
+                <fmt:message key="user.password"/>:<input type="password" name="password"/>
             </div>
             <div>
-                <fmt:message key="user.lastName"/> :
-                <input type="text" name="lastName"/>
+                <fmt:message key="user.lastName"/>:<input type="text" name="lastName"/>
             </div>
             <div>
-                <fmt:message key="user.firstName"/> :
-                <input type="text" name="firstName"/>
+                <fmt:message key="user.firstName"/>:<input type="text" name="firstName"/>
             </div>
             <div>
-                <fmt:message key="user.phoneNumber"/> :
-                <input type="number" name="phoneNum"/>
+                <fmt:message key="user.phoneNumber"/>:<input type="number" name="phoneNum"/>
             </div>
             <div>
-                <fmt:message key="user.email"/> :
-                <input type="email" name="email"/>
+                <fmt:message key="user.email"/>:<input type="email" name="email"/>
             </div>
             <div>
-                <fmt:message key="adminUser.managerIsActive"/> :
+                <fmt:message key="adminUser.managerIsActive"/>:
                 <select name="isActive">
                     <option value="${true}">
                         <fmt:message key="true"/>
@@ -60,45 +57,42 @@
                 </select>
             </div>
             <div>
-                <fmt:message key="user.documentSeries"/> :
-                <input type="text" name="documentSeries"/>
+                <fmt:message key="user.documentSeries"/>:<input type="text" name="documentSeries"/>
             </div>
             <div>
-                <fmt:message key="user.documentNumber"/> :
-                <input type="number" name="documentNum"/>
+                <fmt:message key="user.documentNumber"/>:<input type="number" name="documentNum"/>
             </div>
             <div>
-                <fmt:message key="user.documentDateOfCreation"/> :
-                <input type="date" name="dateIssue"/>
+                <fmt:message key="user.documentDateOfCreation"/>:<input type="date" name="dateIssue"/>
             </div>
             <div>
-                <fmt:message key="user.documentAuthority"/> :
-                <input type="text" name="authority"/>
+                <fmt:message key="user.documentAuthority"/>:<input type="text" name="authority"/>
             </div>
             <div>
                 <button type="submit"><fmt:message key="adminUser.save"/></button>
             </div>
         </form>
     </div>
-
-    <h5><fmt:message key="adminUser.allUsers"/></h5>
-    <table border="1" cellpadding="2" cellspacing="2">
-        <tr>
-            <th><fmt:message key="user.userId"/></th>
-            <th><fmt:message key="user.lastName"/></th>
-            <th><fmt:message key="user.firstName"/></th>
-            <th><fmt:message key="user.phoneNumber"/></th>
-            <th><fmt:message key="user.email"/></th>
-            <th><fmt:message key="user.role"/></th>
-            <th><fmt:message key="user.account"/></th>
-            <th><fmt:message key="user.documentSeries"/></th>
-            <th><fmt:message key="user.documentNumber"/></th>
-            <th><fmt:message key="user.documentDateOfCreation"/></th>
-            <th><fmt:message key="user.documentAuthority"/></th>
-            <th><fmt:message key="user.isActive"/></th>
-            <th><fmt:message key="adminCar.update"/></th>
-        </tr>
-
+    <div>
+        <h5><fmt:message key="adminUser.allUsers"/></h5>
+    </div>
+    <div>
+        <table border="1" cellpadding="2" cellspacing="2">
+            <tr>
+                <th><fmt:message key="user.userId"/></th>
+                <th><fmt:message key="user.lastName"/></th>
+                <th><fmt:message key="user.firstName"/></th>
+                <th><fmt:message key="user.phoneNumber"/></th>
+                <th><fmt:message key="user.email"/></th>
+                <th><fmt:message key="user.role"/></th>
+                <th><fmt:message key="user.account"/></th>
+                <th><fmt:message key="user.documentSeries"/></th>
+                <th><fmt:message key="user.documentNumber"/></th>
+                <th><fmt:message key="user.documentDateOfCreation"/></th>
+                <th><fmt:message key="user.documentAuthority"/></th>
+                <th><fmt:message key="user.isActive"/></th>
+                <th><fmt:message key="adminCar.update"/></th>
+            </tr>
         <c:forEach var="user" items="${users}">
             <tr>
                 <td><c:out value="${user.userId}"/></td>
@@ -131,7 +125,8 @@
                 </td>
             </tr>
         </c:forEach>
-    </table>
+        </table>
+    </div>
 
 
     <%--For displaying Previous link except for the 1st page --%>

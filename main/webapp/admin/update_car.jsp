@@ -16,10 +16,12 @@
     <title><fmt:message key="adminCar.updateCarAdmin"/></title>
 </head>
 <body>
-
-<jsp:include page="../header.jsp"/>
-
-<h3><fmt:message key="adminCar.updateCarAdmin"/></h3>
+    <div>
+        <jsp:include page="../header.jsp"/>
+    </div>
+    <div>
+        <h3><fmt:message key="adminCar.updateCarAdmin"/></h3>
+    </div>
     <div class="form">
         <form method="post" action="/RentCar/admin/car?formType=update">
             <div>
@@ -36,15 +38,13 @@
                 </select>
             </div>
             <div>
-                <fmt:message key="car.brand"/> :
-                <input value="<c:out value="${car.brand}"/>" type="text" name="brand"/>
+                <fmt:message key="car.brand"/>:<input value="<c:out value="${car.brand}"/>" type="text" name="brand"/>
             </div>
             <div>
-                <fmt:message key="car.model"/> :
-                <input value="<c:out value="${car.model}"/>" type="text" name="model"/>
+                <fmt:message key="car.model"/>:<input value="<c:out value="${car.model}"/>" type="text" name="model"/>
             </div>
             <div>
-                <fmt:message key="car.bodyType"/> :
+                <fmt:message key="car.bodyType"/>:
                 <select name="bodyTypeName">
                     <option value="${car.bodyType}" select disable hidden>
                         <fmt:message key="enum.bodyType.${car.bodyType}"/>
@@ -57,7 +57,7 @@
                 </select>
             </div>
             <div>
-                <fmt:message key="car.color"/> :
+                <fmt:message key="car.color"/>:
                 <select name="color">
                     <option value="${car.color}" select disable hidden>
                         <fmt:message key="enum.color.${car.color}"/>
@@ -70,11 +70,11 @@
                 </select>
             </div>
             <div>
-                <fmt:message key="car.yearCreation"/> :
+                <fmt:message key="car.yearCreation"/>:
                 <input value="<c:out value="${car.yearCreation}"/>" type="number" name="yearCreation"/>
             </div>
             <div>
-                <fmt:message key="car.transmission"/> :
+                <fmt:message key="car.transmission"/>:
                 <select name="transmissionTypeName">
                     <option value="${car.transmissionType}" select disable hidden>
                         <fmt:message key="enum.transmissionType.${car.transmissionType}"/>
@@ -87,15 +87,15 @@
                 </select>
             </div>
             <div>
-                <fmt:message key="car.sizeEngine"/> :
+                <fmt:message key="car.sizeEngine"/>:
                 <input value="<c:out value="${car.engineSize}"/>" step=".01" type="number" name="engineSize"/>
             </div>
             <div>
-                <fmt:message key="car.powerEngine"/> :
+                <fmt:message key="car.powerEngine"/>:
                 <input value="<c:out value="${car.enginePower}"/>" type="number" name="enginePower"/>
             </div>
             <div>
-                <fmt:message key="car.fuelType"/> :
+                <fmt:message key="car.fuelType"/>:
                 <select name="fuelTypeName">
                     <option value="${car.fuelType}" select disable hidden>
                         <fmt:message key="enum.fuelType.${car.fuelType}"/>
@@ -108,11 +108,11 @@
                 </select>
             </div>
             <div>
-                <fmt:message key="car.price"/> :
+                <fmt:message key="car.price"/>:
                 <input value="<c:out value="${car.price}"/>" step=".01" type="number" name="price"/>
             </div>
             <div>
-                <fmt:message key="car.isActive"/> :
+                <fmt:message key="car.isActive"/>:
                 <select name="isActive">
                     <option value="${car.isActive}" select disable hidden>
                         <fmt:message key="${car.isActive}"/>

@@ -15,23 +15,45 @@
     <title><fmt:message key="registration.pageRegistration"/></title>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
-
-    <h3><fmt:message key="registration.pageRegistration"/></h3>
-    <div class="form">
-        <form method="post" action="registration">
-            <label><fmt:message key="user.login"/>:</label><input type="text" name="login"/><br>
-            <label><fmt:message key="user.password"/>:</label><input type="password" name="password"/><br>
-            <label><fmt:message key="registration.confirmPassword"/>:</label><input type="password" name="conPassword"/><br>
-            <label><fmt:message key="user.firstName"/>:</label><input type="text" name="firstName"/><br>
-            <label><fmt:message key="user.lastName"/>:</label><input type="text" name="lastName"/><br>
-            <label><fmt:message key="user.email"/>:</label><input type="email" name="email"/><br>
-            <label><fmt:message key="user.phoneNumber"/>:</label><input type="tel" name="phoneNumber"/><br>
-            <input type="submit" value="<fmt:message key="registration.register"/>"/><br>
+    <div>
+        <jsp:include page="header.jsp"/>
+    </div>
+    <div class="text-center">
+        <div>
+            <h3 class="mb-3 mt-3 font-weight-normal"><fmt:message key="registration.pageRegistration"/></h3>
+        </div>
+        <form method="post" action="registration" style="max-width:400px;margin: auto">
+            <div class="mt-1">
+                <input type="text" class="form-control" placeholder="<fmt:message key="user.login"/>" name="login"/>
+            </div>
+            <div class="mt-1">
+                <input type="password" class="form-control" placeholder="<fmt:message key="user.password"/>" name="password"/>
+            </div>
+            <div class="mt-1">
+                <input type="password" class="form-control" placeholder="<fmt:message key="registration.confirmPassword"/>" name="conPassword"/>
+            </div>
+            <div class="mt-1">
+                <input type="text" class="form-control" placeholder="<fmt:message key="user.firstName"/>" name="firstName"/>
+            </div>
+            <div class="mt-1">
+                <input type="text" class="form-control" placeholder="<fmt:message key="user.lastName"/>" name="lastName"/>
+            </div>
+            <div class="mt-1">
+                <input type="email" class="form-control" placeholder="<fmt:message key="user.email"/>" name="email"/>
+            </div>
+            <div class="mt-1">
+                <input type="tel" class="form-control" placeholder="<fmt:message key="user.phoneNumber"/>" name="phoneNumber"/>
+            </div>
+            <div class="mt-3">
+                <input class="btn btn-lg btn-primary btn-block" type="submit" value="<fmt:message key="registration.register"/>"/>
+            </div>
         </form>
     </div>
-    <jsp:include page="message_error.jsp"/>
-    <br>
-    <a href="/RentCar/login"><fmt:message key="user.login"/></a>
+    <div class="text-center">
+        <jsp:include page="message_error.jsp"/>
+    </div>
+    <div class="text-center mt-5">
+        <a href="/RentCar/login"><fmt:message key="user.login"/></a>
+    </div>
 </body>
 </html>

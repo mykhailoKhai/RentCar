@@ -93,20 +93,6 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public void updateOrder(Order order) {
-        try (Connection connection = DBManager.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE orders SET status_order = ?, status_message = ?, damage_paid = ? WHERE order_id = ?")) {
-            preparedStatement.setInt(1, Status.valueOf(order.getStatusOrder()).getStatusId());
-            preparedStatement.setString(2, order.getStatusMessage());
-            preparedStatement.setDouble(3, order.getDamagePaid());
-            preparedStatement.setLong(4, order.getOrderId());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            logger.error(e);
-        }
-    }
-
-    @Override
     public void changeStatusOrder(long orderId, String statusOrder) {
         try (Connection connection = DBManager.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("UPDATE orders SET status_order = ? WHERE order_id = ?")) {

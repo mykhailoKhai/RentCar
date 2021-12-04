@@ -16,8 +16,10 @@
 <head>
 </head>
 <body>
-    <c:if test="${message != null}">
-        <h2 style="color:red"><fmt:message key="${message}"/></h2>
-    </c:if>
+    <div>
+        <c:if test="${message != null}">
+            <h2 style="color:red"><fmt:message key="${message}"/></h2>
+        </c:if>
+    </div>
 </body>
 </html>

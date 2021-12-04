@@ -9,7 +9,9 @@ public interface OrderDAO {
 
     List<Order> getAllOrder();
 
-    void updateOrder(Order order);
+    Order getFindById(long orderId);
+
+    void changeTotalCost(long orderId, double newTotalCost);
 
     void changeStatusOrder(long orderId, String statusOrder);
 
@@ -18,8 +20,4 @@ public interface OrderDAO {
     void changeDamagePaid(long orderId, double damagePaid);
 
     void changeStatusDamagePaid(long orderId, boolean b);
-
-    Order getFindById(long orderId);
-
-    void changeTotalCost(long orderId, double newTotalCost);
 }

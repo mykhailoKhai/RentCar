@@ -16,125 +16,132 @@
     <title><fmt:message key="adminCar.managementCarAdmin"/></title>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
-    <h3><fmt:message key="adminCar.managementCarAdmin"/></h3>
-
-    <jsp:include page="/message_error.jsp"/>
-
+    <div>
+        <jsp:include page="../header.jsp"/>
+    </div>
+    <div>
+        <h3><fmt:message key="adminCar.managementCarAdmin"/></h3>
+    </div>
+    <div>
+        <jsp:include page="/message_error.jsp"/>
+    </div>
     <div class="form">
-        <h3><fmt:message key="adminCar.createNewCar"/></h3>
-        <form method="post" action="/RentCar/admin/car?formType=createCar">
-            <div>
-                <fmt:message key="car.carType"/> :
-                <select name="carTypeName">
-                    <c:forEach items="${carTypes}" var="carType">
-                        <option value="${carTypes.get(carType.carTypeId - 1)}">
-                            <fmt:message key="enum.carType.${carTypes.get(carType.carTypeId - 1)}"/>
-                        </option>
-                    </c:forEach>
-                </select>
-            </div>
-            <div>
-                <fmt:message key="car.brand"/> :
-                <input type="text" name="brand"/>
-            </div>
-            <div>
-                <fmt:message key="car.model"/> :
-                <input type="text" name="model"/>
-            </div>
-            <div>
-                <fmt:message key="car.bodyType"/> :
-                <select name="bodyTypeName">
-                    <c:forEach items="${bodyTypes}" var="bodyType">
-                        <option value="${bodyTypes.get(bodyType.bodyTypeId - 1)}">
-                            <fmt:message key="enum.bodyType.${bodyTypes.get(bodyType.bodyTypeId - 1)}"/>
-                        </option>
-                    </c:forEach>
-                </select>
-            </div>
-            <div>
-                <fmt:message key="car.color"/> :
-                <select name="color">
-                    <c:forEach items="${colors}" var="color">
-                        <option value="${colors.get(color.colorId - 1)}">
-                            <fmt:message key="enum.color.${colors.get(color.colorId - 1)}"/>
-                        </option>
-                    </c:forEach>
-                </select>
-            </div>
-            <div>
-                <fmt:message key="car.yearCreation"/> :
-                <input type="number" name="yearCreation"/>
-            </div>
-            <div>
-                <fmt:message key="car.transmission"/> :
-                <select name="transmissionTypeName">
-                    <c:forEach items="${transmissionTypes}" var="transmissionType">
-                        <option value="${transmissionTypes.get(transmissionType.transmissionId - 1)}">
-                            <fmt:message key="enum.transmissionType.${transmissionTypes.get(transmissionType.transmissionId - 1)}"/>
-                                   </option>
-                    </c:forEach>
-                </select>
-            </div>
-            <div>
-                <fmt:message key="car.sizeEngine"/> :
-                <input type="number" step=".01" name="engineSize"/>
-            </div>
-            <div>
-                <fmt:message key="car.powerEngine"/> :
-                <input type="number" name="enginePower"/>
-            </div>
-            <div>
-                <fmt:message key="car.fuelType"/> :
-                <select name="fuelTypeName">
-                    <c:forEach items="${fuelTypes}" var="fuelType">
-                        <option value="${fuelTypes.get(fuelType.fuelTypeId - 1)}">
-                            <fmt:message key="enum.fuelType.${fuelTypes.get(fuelType.fuelTypeId - 1)}"/>
-                        </option>
-                    </c:forEach>
-                </select>
-            </div>
-            <div>
-                <fmt:message key="car.price"/> :
-                <input type="number" step=".01" name="price"/>
-            </div>
-            <div>
-                <fmt:message key="car.isActive"/> :
-                    <select name="isActive">
-                        <option value="${true}">
-                            <fmt:message key="true"/>
-                        </option>
-                        <option value="${false}">
-                            <fmt:message key="false"/>
-                        </option>
-                    </select>
-            </div>
-            <div>
-                <button type="submit"><fmt:message key="adminCar.saveCar"/></button>
-                </div>
-            </form>
+        <div>
+            <h5><fmt:message key="adminCar.createNewCar"/></h5>
         </div>
-
-    <h5><fmt:message key="main.allCars"/></h5>
-    <table border="1" cellpadding="2" cellspacing="2">
-        <tr>
-            <th><fmt:message key="car.carId"/></th>
-            <th><fmt:message key="car.carType"/></th>
-            <th><fmt:message key="car.brand"/></th>
-            <th><fmt:message key="car.model"/></th>
-            <th><fmt:message key="car.bodyType"/></th>
-            <th><fmt:message key="car.color"/></th>
-            <th><fmt:message key="car.yearCreation"/></th>
-            <th><fmt:message key="car.transmission"/></th>
-            <th><fmt:message key="car.sizeEngine"/></th>
-            <th><fmt:message key="car.powerEngine"/></th>
-            <th><fmt:message key="car.fuelType"/></th>
-            <th><fmt:message key="car.price"/></th>
-            <th><fmt:message key="car.isActive"/></th>
-            <th><fmt:message key="adminCar.delete"/></th>
-            <th><fmt:message key="adminCar.update"/></th>
-        </tr>
-
+        <div>
+            <form method="post" action="/RentCar/admin/car?formType=createCar">
+                <div>
+                    <fmt:message key="car.carType"/> :
+                    <select name="carTypeName">
+                        <c:forEach items="${carTypes}" var="carType">
+                            <option value="${carTypes.get(carType.carTypeId - 1)}">
+                                <fmt:message key="enum.carType.${carTypes.get(carType.carTypeId - 1)}"/>
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div>
+                    <fmt:message key="car.brand"/>:<input type="text" name="brand"/>
+                </div>
+                <div>
+                    <fmt:message key="car.model"/>:<input type="text" name="model"/>
+                </div>
+                <div>
+                    <fmt:message key="car.bodyType"/> :
+                    <select name="bodyTypeName">
+                        <c:forEach items="${bodyTypes}" var="bodyType">
+                            <option value="${bodyTypes.get(bodyType.bodyTypeId - 1)}">
+                                <fmt:message key="enum.bodyType.${bodyTypes.get(bodyType.bodyTypeId - 1)}"/>
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div>
+                    <fmt:message key="car.color"/> :
+                    <select name="color">
+                        <c:forEach items="${colors}" var="color">
+                            <option value="${colors.get(color.colorId - 1)}">
+                                <fmt:message key="enum.color.${colors.get(color.colorId - 1)}"/>
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div>
+                    <fmt:message key="car.yearCreation"/> :
+                    <input type="number" name="yearCreation"/>
+                </div>
+                <div>
+                    <fmt:message key="car.transmission"/> :
+                    <select name="transmissionTypeName">
+                        <c:forEach items="${transmissionTypes}" var="transmissionType">
+                            <option value="${transmissionTypes.get(transmissionType.transmissionId - 1)}">
+                                <fmt:message key="enum.transmissionType.${transmissionTypes.get(transmissionType.transmissionId - 1)}"/>
+                                       </option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div>
+                    <fmt:message key="car.sizeEngine"/> :
+                    <input type="number" step=".01" name="engineSize"/>
+                </div>
+                <div>
+                    <fmt:message key="car.powerEngine"/> :
+                    <input type="number" name="enginePower"/>
+                </div>
+                <div>
+                    <fmt:message key="car.fuelType"/> :
+                    <select name="fuelTypeName">
+                        <c:forEach items="${fuelTypes}" var="fuelType">
+                            <option value="${fuelTypes.get(fuelType.fuelTypeId - 1)}">
+                                <fmt:message key="enum.fuelType.${fuelTypes.get(fuelType.fuelTypeId - 1)}"/>
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div>
+                    <fmt:message key="car.price"/> :
+                    <input type="number" step=".01" name="price"/>
+                </div>
+                <div>
+                    <fmt:message key="car.isActive"/> :
+                        <select name="isActive">
+                            <option value="${true}">
+                                <fmt:message key="true"/>
+                            </option>
+                            <option value="${false}">
+                                <fmt:message key="false"/>
+                            </option>
+                        </select>
+                </div>
+                <div>
+                    <button type="submit"><fmt:message key="adminCar.saveCar"/></button>
+                    </div>
+                </form>
+            </div>
+    </div>
+    <div>
+        <h5><fmt:message key="main.allCars"/></h5>
+    </div>
+    <div>
+        <table border="1" cellpadding="2" cellspacing="2">
+            <tr>
+                <th><fmt:message key="car.carId"/></th>
+                <th><fmt:message key="car.carType"/></th>
+                <th><fmt:message key="car.brand"/></th>
+                <th><fmt:message key="car.model"/></th>
+                <th><fmt:message key="car.bodyType"/></th>
+                <th><fmt:message key="car.color"/></th>
+                <th><fmt:message key="car.yearCreation"/></th>
+                <th><fmt:message key="car.transmission"/></th>
+                <th><fmt:message key="car.sizeEngine"/></th>
+                <th><fmt:message key="car.powerEngine"/></th>
+                <th><fmt:message key="car.fuelType"/></th>
+                <th><fmt:message key="car.price"/></th>
+                <th><fmt:message key="car.isActive"/></th>
+                <th><fmt:message key="adminCar.delete"/></th>
+                <th><fmt:message key="adminCar.update"/></th>
+            </tr>
         <c:forEach var="car" items="${cars}">
             <tr>
                 <td><c:out value="${car.carId}"/></td>
@@ -161,8 +168,9 @@
                     </form>
                 </td>
             </tr>
-        </c:forEach>
-    </table>
+            </c:forEach>
+        </table>
+    </div>
 
  <%--For displaying Previous link except for the 1st page --%>
      <c:if test="${currentPage != 1}">

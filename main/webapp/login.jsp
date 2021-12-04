@@ -16,18 +16,29 @@
     <title><fmt:message key="login.pageLogin"/></title>
 </head>
 <body>
-    <jsp:include page="header.jsp"/>
-
-<h3><fmt:message key="login.pageLogin"/></h3>
-
-    <div class="form">
-        <form method="post" action="login">
-            <label><fmt:message key="user.login"/>:</label><input type="text" name="login"/><br>
-            <label><fmt:message key="user.password"/>:</label><input type="password" name="password"/><br>
-            <input type="submit" value="<fmt:message key="login.enter"/>"/><br>
+    <div>
+        <jsp:include page="header.jsp"/>
+    </div>
+    <div class="text-center">
+        <div>
+            <h3 class="mb-3 mt-3 font-weight-normal"><fmt:message key="login.pageLogin"/></h3>
+        </div>
+        <form method="post" action="login" style="max-width:300px;margin: auto">
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="<fmt:message key="user.login"/>" name="login"/>
+            </div>
+            <div>
+                <input type="password" class="form-control" placeholder="<fmt:message key="user.password"/>" name="password"/>
+            </div>
+            <div class="mt-3">
+                <input class="btn btn-lg btn-primary btn-block" type="submit" value="<fmt:message key="login.enter"/>"/>
+            </div>
         </form>
+    </div>
+    <div class="text-center">
         <jsp:include page="message_error.jsp"/>
-        <br>
+    </div>
+    <div class="text-center mt-5">
         <a href="/RentCar/registration"><fmt:message key="login.registration"/></a>
     </div>
 </body>
